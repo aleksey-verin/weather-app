@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { addDataForRequestCounter, addDataForTopOneCity } from './store/reducers/statisticsSlice';
 import { ROUTES } from './routes/routes';
 import {
@@ -33,7 +33,7 @@ const App = () => {
 
   return (
     <div className="wrapper">
-      <BrowserRouter>
+      <HashRouter>
         <Navbar />
         <Routes>
           <Route element={<Weather />} path={ROUTES.MAIN_ROUTE} />
@@ -41,7 +41,7 @@ const App = () => {
           <Route element={<Help />} path={ROUTES.HELP_ROUTE} />
           <Route path="*" element={<Navigate replace to={ROUTES.MAIN_ROUTE} />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };
