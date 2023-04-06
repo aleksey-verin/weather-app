@@ -5,19 +5,15 @@ import { selectorStatistics } from '../store/reducers/statisticsSlice';
 const Stats = () => {
   const { requestCounter, topOneCity } = useSelector(selectorStatistics);
 
-  if (!requestCounter || !topOneCity) return null;
-
-  const lastDigitTop = Number(topOneCity.count.toString().slice(-1));
-  const wordEndingTop = lastDigitTop >= 2 && lastDigitTop <= 4 ? 'а' : '';
-  const lastDigitCount = Number(requestCounter.toString().slice(-1));
-  const wordEndingCount = lastDigitCount >= 2 && lastDigitCount <= 4 ? 'а' : '';
+  const topCityName = topOneCity ? topOneCity.name : '';
+  const topCityCount = topOneCity ? topOneCity.count : '';
 
   return (
     <div className="container" style={{ fontSize: 20, padding: 10 }}>
       <div style={{ marginBottom: 10, textAlign: 'center' }}>Самый часто запрашиваемый город:</div>
       <div style={{ color: 'purple', marginBottom: 10, textAlign: 'center' }}>
-        {topOneCity.name && topOneCity.count
-          ? ` ${topOneCity.name} (${topOneCity.count} раз${wordEndingTop})`
+        {topCityName && topCityCount
+          ? `город: ${topCityName}; количество запросов: ${topCityCount}`
           : ' Нет данных'}
       </div>
       <div style={{ marginBottom: 10, textAlign: 'center' }}>Сколько раз Вы меняли города: </div>
@@ -25,7 +21,7 @@ const Stats = () => {
         style={{
           color: 'purple',
           textAlign: 'center'
-        }}>{`${requestCounter} раз${wordEndingCount}`}</div>
+        }}>{`количество запросов: ${requestCounter}`}</div>
     </div>
   );
 };
